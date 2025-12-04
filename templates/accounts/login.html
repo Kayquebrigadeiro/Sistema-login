@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-  <h1>Login</h1>
+  <h1>🔐 Login</h1>
   {% if messages %}
     <ul>
       {% for message in messages %}
@@ -49,5 +49,5 @@
       </div>
     </button>
   </form>
-  <p>Não tem conta? <a href="{% url 'accounts:register' %}">Cadastre-se</a></p>
+  <p style="margin-top: 25px; font-size: 16px;">Não tem conta? <a href="{% url 'accounts:register' %}" style="font-size: 16px;">✨ Cadastre-se aqui</a></p>
 {% endblock %}

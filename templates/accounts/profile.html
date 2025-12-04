@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
   <h1>Perfil</h1>
-  <p>Usuário: {{ request.user.username }}</p>
-  <p>Email: {{ request.user.email }}</p>
+  <div style="background: rgba(142, 38, 226, 0.2); padding: 25px; border-radius: 15px; margin: 20px 0; border: 1px solid rgba(244, 177, 253, 0.3);">
+    <p style="font-size: 18px; margin: 10px 0;"><strong>👤 Usuário:</strong> {{ request.user.username }}</p>
+    <p style="font-size: 18px; margin: 10px 0;"><strong>📧 Email:</strong> {{ request.user.email|default:"Não informado" }}</p>
+    <p style="font-size: 18px; margin: 10px 0;"><strong>📅 Membro desde:</strong> {{ request.user.date_joined|date:"d/m/Y" }}</p>
+  </div>
+  <p style="margin-top: 30px;"><a href="{% url 'accounts:dashboard' %}">← Voltar ao Dashboard</a></p>
 {% endblock %}

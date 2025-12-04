@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Dashboard</h1>
-  <p>Olá, {{ request.user.username }}!</p>
-  <p><a href="{% url 'accounts:profile' %}">Meu perfil</a></p>
+  <h1>🎉 Dashboard</h1>
+  <div style="background: rgba(142, 38, 226, 0.2); padding: 20px; border-radius: 15px; margin: 20px 0; border: 1px solid rgba(244, 177, 253, 0.3);">
+    <p style="font-size: 20px; margin: 15px 0;">Olá, <strong style="color: #f4b1fd;">{{ request.user.username }}</strong>!</p>
+    <p style="margin: 15px 0;">Bem-vindo ao seu painel de controle ✨</p>
+  </div>
+  <p style="margin: 25px 0;"><a href="{% url 'accounts:profile' %}" style="font-size: 18px;">👤 Ver Meu Perfil</a></p>
   <form method="post" action="{% url 'accounts:logout' %}">
     {% csrf_token %}
     <button class="button" type="submit">

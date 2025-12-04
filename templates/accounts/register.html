@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Cadastro</h1>
+  <h1>✨ Cadastro</h1>
   {% if messages %}
     <ul>
       {% for message in messages %}
@@ -56,5 +56,5 @@
       </div>
     </button>
   </form>
-  <p>Já tem conta? <a href="{% url 'accounts:login' %}">Faça login</a></p>
+  <p style="margin-top: 25px; font-size: 16px;">Já tem conta? <a href="{% url 'accounts:login' %}" style="font-size: 16px;">🔐 Faça login aqui</a></p>
 {% endblock %}
