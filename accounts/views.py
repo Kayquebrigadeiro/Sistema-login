@@ -12,10 +12,10 @@ def register(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            # Criar perfil automaticamente
+            from .models import Profile
+            Profile.objects.get_or_create(user=user)
             messages.success(request, 'Cadastro realizado com sucesso! Faça login para continuar.')
-            # Opcional: login automático após cadastro:
-            # login(request, user)
-            # return redirect('accounts:dashboard')
             return redirect('accounts:login')
         else:
             messages.error(request, 'Verifique os dados informados.')
@@ -29,11 +29,18 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 
 @login_required
 def profile(request):
+    # Garantir que o perfil existe
+    from .models import Profile
+    Profile.objects.get_or_create(user=request.user)
     return render(request, 'accounts/profile.html', {})
 
 
 @login_required
 def edit_profile(request):
+    # Garantir que o perfil existe
+    from .models import Profile
+    Profile.objects.get_or_create(user=request.user)
+    
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=request.user)
         profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
