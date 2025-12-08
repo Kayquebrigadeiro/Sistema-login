@@ -76,4 +76,6 @@ LOGIN_REDIRECT_URL = 'accounts:dashboard'
 LOGOUT_REDIRECT_URL = 'accounts:login'
 LOGIN_URL = 'accounts:login'
 
+# Configurações de Email (para recuperação de senha)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
