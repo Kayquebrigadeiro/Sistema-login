@@ -79,3 +79,8 @@ LOGIN_URL = 'accounts:login'
 # Configurações de Email (para recuperação de senha)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# Configurações de Mídia (para upload de arquivos)
+import os
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+

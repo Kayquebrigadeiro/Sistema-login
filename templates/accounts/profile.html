@@ -1,10 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Perfil</h1>
+  <h1>👤 Perfil</h1>
+  
+  {% if request.user.profile.avatar %}
+    <div style="text-align: center; margin: 20px 0;">
+      <img src="{{ request.user.profile.avatar.url }}" alt="Avatar" style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid #f4b1fd; box-shadow: 0 4px 15px rgba(244, 177, 253, 0.4);">
+    </div>
+  {% endif %}
+  
   <div style="background: rgba(142, 38, 226, 0.2); padding: 25px; border-radius: 15px; margin: 20px 0; border: 1px solid rgba(244, 177, 253, 0.3);">
     <p style="font-size: 18px; margin: 10px 0;"><strong>👤 Usuário:</strong> {{ request.user.username }}</p>
     <p style="font-size: 18px; margin: 10px 0;"><strong>📧 Email:</strong> {{ request.user.email|default:"Não informado" }}</p>
+    <p style="font-size: 18px; margin: 10px 0;"><strong>📛 Nome:</strong> {{ request.user.first_name|default:"Não informado" }} {{ request.user.last_name }}</p>
     <p style="font-size: 18px; margin: 10px 0;"><strong>📅 Membro desde:</strong> {{ request.user.date_joined|date:"d/m/Y" }}</p>
   </div>
+  
+  <div style="margin: 25px 0;">
+    <p style="margin: 15px 0;"><a href="{% url 'accounts:edit_profile' %}" style="font-size: 18px;">✏️ Editar Perfil</a></p>
+    <p style="margin: 15px 0;"><a href="{% url 'accounts:password_change' %}" style="font-size: 18px;">🔐 Alterar Senha</a></p>
+  </div>
+  
   <p style="margin-top: 30px;"><a href="{% url 'accounts:dashboard' %}">← Voltar ao Dashboard</a></p>
 {% endblock %}
