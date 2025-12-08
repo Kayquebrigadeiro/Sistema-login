@@ -485,9 +485,8 @@ CSRF_COOKIE_SECURE = True
 
 ### Melhorias Sugeridas
 
-- [X] Adicionar recuperação de senha Fazer um token que envie email de recuperação de senha
-- [ ] Implementar edição de perfil
-- [ ] Upload de foto de perfil
+- [X] Adicionar recuperação de senha. obs: Fazer um token que envie email de recuperação de senha
+- [X] Upload de foto de perfil
 - [ ] Verificação de email
 - [ ] Login social (Google, Facebook)
 - [ ] Adicionar CSS/Bootstrap
