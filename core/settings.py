@@ -78,6 +78,18 @@ LOGIN_URL = 'accounts:login'
 
 # Configurações de Email (para recuperação de senha)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'no-reply@seudominio.com'
+
+# Tempo de validade do token de recuperação de senha (em segundos)
+PASSWORD_RESET_TIMEOUT = 3600  # 1 hora
+
+# Para produção, substitua pelo backend SMTP:
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.seudominio.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'seu_usuario_smtp'
+# EMAIL_HOST_PASSWORD = 'sua_senha_smtp'
 
 # Configurações de Mídia (para upload de arquivos)
 import os

@@ -4,15 +4,21 @@ from django.contrib.auth.models import User
 from .models import Profile
 
 class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+    
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2')
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update({
             'class': 'input',
             'placeholder': 'Username'
+        })
+        self.fields['email'].widget.attrs.update({
+            'class': 'input',
+            'placeholder': 'seu@email.com'
         })
         self.fields['password1'].widget.attrs.update({
             'class': 'input',
