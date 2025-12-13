@@ -1,9 +1,12 @@
 from pathlib import Path
 import os
-from dotenv import load_dotenv
 
 # Carregar variáveis de ambiente do arquivo .env
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # python-dotenv não instalado, usar variáveis de ambiente do sistema
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
