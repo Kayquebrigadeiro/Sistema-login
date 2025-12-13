@@ -456,4 +456,4 @@ http://127.0.0.1:8000
 
 ---
 
-**Desenvolvido com ❤️ e Django**
+**Desenvolvido com 😭 e Django**
