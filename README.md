@@ -1,6 +1,6 @@
 # 🔐 Sistema de Login Django
 
-Sistema completo de autenticação desenvolvido em Django com cadastro, login, logout, dashboard e perfil de usuário.
+Sistema completo de autenticação desenvolvido em Django com cadastro, login, logout, dashboard, perfil de usuário, recuperação de senha via email e upload de avatar.
 
 ---
 
@@ -9,39 +9,49 @@ Sistema completo de autenticação desenvolvido em Django com cadastro, login, l
 - [Sobre o Projeto](#sobre-o-projeto)
 - [Funcionalidades](#funcionalidades)
 - [Tecnologias](#tecnologias)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Pré-requisitos](#pré-requisitos)
-- [Instalação](#instalação)
 - [Como Rodar o Projeto](#como-rodar-o-projeto)
-- [Acessando o Sistema](#acessando-o-sistema)
-- [Comandos Úteis](#comandos-úteis)
 - [Estrutura de URLs](#estrutura-de-urls)
+- [Configuração de Email](#configuração-de-email)
+- [Diário de Modificações](#diário-de-modificações)
+- [Melhorias Sugeridas](#melhorias-sugeridas)
 - [Troubleshooting](#troubleshooting)
+- [Segurança](#segurança)
 
 ---
 
 ## 🎯 Sobre o Projeto
 
-Sistema de autenticação completo que permite:
-- Cadastro de novos usuários
-- Login e logout
-- Dashboard protegido (apenas usuários autenticados)
-- Página de perfil
-- Sistema de mensagens (feedback visual)
-- Redirecionamentos automáticos
+Sistema de autenticação completo desenvolvido em Django que oferece:
+- Cadastro de usuários com email obrigatório
+- Sistema de login e logout seguro
+- Dashboard protegido para usuários autenticados
+- Perfil de usuário com upload de avatar
+- Edição completa de perfil (nome, email, avatar)
+- Recuperação de senha via email Gmail
+- Alteração de senha para usuários logados
+- Interface moderna com estética roxa personalizada
 
 ---
 
 ## ✨ Funcionalidades
 
-- ✅ **Cadastro de Usuários**: Formulário com validação de senha
+### Autenticação
+- ✅ **Cadastro**: Formulário com validação de senha e email obrigatório
 - ✅ **Login**: Autenticação segura com Django Auth
 - ✅ **Logout**: Encerramento de sessão
-- ✅ **Dashboard**: Área restrita para usuários logados
-- ✅ **Perfil**: Visualização de dados do usuário
+- ✅ **Recuperação de Senha**: Token seguro enviado por email (válido por 1 hora)
+
+### Perfil de Usuário
+- ✅ **Visualização**: Exibe username, email, nome completo e data de cadastro
+- ✅ **Edição**: Atualização de dados pessoais
+- ✅ **Avatar**: Upload e exibição de foto de perfil
+- ✅ **Alteração de Senha**: Mudança de senha para usuários logados
+
+### Segurança
 - ✅ **Proteção de Rotas**: Páginas protegidas por login
-- ✅ **Mensagens de Feedback**: Sucesso, erro, avisos
-- ✅ **Redirecionamentos**: Automáticos após login/logout
+- ✅ **Mensagens de Feedback**: Sucesso, erro e avisos
+- ✅ **Variáveis de Ambiente**: Credenciais protegidas em arquivo .env
+- ✅ **Tokens Seguros**: Sistema de recuperação de senha do Django
 
 ---
 
@@ -50,270 +60,52 @@ Sistema de autenticação completo que permite:
 - **Python** 3.10+
 - **Django** 4.2+
 - **SQLite3** (banco de dados)
-- **HTML5** (templates)
-- **Django Template Language**
+- **Pillow** (processamento de imagens)
+- **python-dotenv** (variáveis de ambiente)
+- **Gmail SMTP** (envio de emails)
+- **HTML5 + CSS3** (interface)
 
 ---
 
-## 📁 Estrutura do Projeto
+## 🚀 Como Rodar o Projeto
 
-```
-sistema de login 2/
-│
-├── core/                          # Configurações principais
-│   ├── __init__.py
-│   ├── settings.py               # Configurações do Django
-│   ├── urls.py                   # URLs principais
-│   ├── wsgi.py                   # Servidor WSGI
-│   └── asgi.py                   # Servidor ASGI
-│
-├── accounts/                      # App de autenticação
-│   ├── __init__.py
-│   ├── views.py                  # Lógica das views
-│   └── urls.py                   # Rotas do app
-│
-├── templates/                     # Templates HTML
-│   ├── base.html                 # Template base
-│   └── accounts/
-│       ├── login.html            # Página de login
-│       ├── register.html         # Página de cadastro
-│       ├── dashboard.html        # Dashboard
-│       └── profile.html          # Perfil do usuário
-│
-├── venv/                          # Ambiente virtual (não versionar)
-├── db.sqlite3                     # Banco de dados (criado após migrate)
-├── manage.py                      # Gerenciador Django
-├── requirements.txt               # Dependências
-├── .gitignore                     # Arquivos ignorados pelo Git
-└── README.md                      # Este arquivo
-```
+### Pré-requisitos
+- Python 3.10 ou superior
+- pip (gerenciador de pacotes)
+- Git (opcional)
 
----
-
-## 📦 Pré-requisitos
-
-Antes de começar, você precisa ter instalado:
-
-- **Python 3.10 ou superior**
-  - Verifique: `python --version`
-  - Download: https://www.python.org/downloads/
-
-- **pip** (gerenciador de pacotes Python)
-  - Verifique: `pip --version`
-  - Geralmente vem com Python
-
-- **Git** (opcional, para clonar o projeto)
-  - Verifique: `git --version`
-  - Download: https://git-scm.com/
-
----
-
-## 🚀 Instalação
-
-### Passo 1: Clone ou baixe o projeto
+### Instalação Rápida
 
 ```bash
-# Se usar Git
-git clone <url-do-repositorio>
-cd "sistema de login 2"
+# 1. Clone o repositório
+git clone https://github.com/Kayquebrigadeiro/Sistema-login.git
+cd Sistema-login
 
-# Ou baixe o ZIP e extraia
-```
-
-### Passo 2: Crie o ambiente virtual
-
-```bash
-# Windows
+# 2. Crie e ative o ambiente virtual
 python -m venv venv
+venv\Scripts\activate  # Windows
+# source venv/bin/activate  # Linux/Mac
 
-# Linux/Mac
-python3 -m venv venv
-```
-
-### Passo 3: Ative o ambiente virtual
-
-```bash
-# Windows (CMD)
-venv\Scripts\activate
-
-# Windows (PowerShell)
-venv\Scripts\Activate.ps1
-
-# Linux/Mac
-source venv/bin/activate
-```
-
-**✅ Você saberá que está ativo quando ver `(venv)` no início da linha do terminal**
-
-### Passo 4: Instale as dependências
-
-```bash
+# 3. Instale as dependências
 pip install -r requirements.txt
-```
 
-**Isso instalará:**
-- Django 4.2+
+# 4. Configure o arquivo .env (copie do .env.example)
+cp .env.example .env
+# Edite o .env com suas credenciais de email
 
-### Passo 5: Configure o banco de dados
-
-```bash
-# Criar as tabelas no banco de dados
+# 5. Execute as migrações
 python manage.py migrate
-```
 
-**Saída esperada:**
-```
-Operations to perform:
-  Apply all migrations: admin, auth, contenttypes, sessions
-Running migrations:
-  Applying contenttypes.0001_initial... OK
-  Applying auth.0001_initial... OK
-  ...
-```
+# 6. Crie perfis para usuários existentes (se necessário)
+python create_profiles.py
 
-### Passo 6: Crie um superusuário (opcional, mas recomendado)
-
-```bash
-python manage.py createsuperuser
-```
-
-**Você será solicitado a informar:**
-- Username (nome de usuário)
-- Email (pode deixar em branco)
-- Password (senha - não aparece enquanto digita)
-- Password confirmation (confirme a senha)
-
----
-
-## ▶️ Como Rodar o Projeto
-
-### 1. Certifique-se de que o ambiente virtual está ativo
-
-```bash
-# Você deve ver (venv) no início da linha
-# Se não estiver ativo, rode:
-venv\Scripts\activate
-```
-
-### 2. Inicie o servidor de desenvolvimento
-
-```bash
+# 7. Rode o servidor
 python manage.py runserver
 ```
 
-**Saída esperada:**
-```
-Watching for file changes with StatReloader
-Performing system checks...
-
-System check identified no issues (0 silenced).
-December 19, 2024 - 10:30:00
-Django version 4.2.x, using settings 'core.settings'
-Starting development server at http://127.0.0.1:8000/
-Quit the server with CTRL-BREAK.
-```
-
-### 3. Acesse o projeto no navegador
-
-Abra seu navegador e acesse:
-- **http://127.0.0.1:8000**
-- ou **http://localhost:8000**
-
-### 4. Para parar o servidor
-
-Pressione `CTRL + C` no terminal
-
----
-
-## 🌐 Acessando o Sistema
-
-### Página Inicial
-- **URL**: http://127.0.0.1:8000/
-- **Redireciona para**: Login
-
-### Cadastro
-- **URL**: http://127.0.0.1:8000/accounts/register/
-- Crie uma nova conta
-- Após cadastro, será redirecionado para login
-
-### Login
-- **URL**: http://127.0.0.1:8000/accounts/login/
-- Use as credenciais criadas
-- Após login, será redirecionado para dashboard
-
-### Dashboard (Protegido)
-- **URL**: http://127.0.0.1:8000/accounts/dashboard/
-- Requer login
-- Exibe saudação com nome do usuário
-
-### Perfil (Protegido)
-- **URL**: http://127.0.0.1:8000/accounts/profile/
-- Requer login
-- Exibe informações do usuário
-
-### Painel Admin
-- **URL**: http://127.0.0.1:8000/admin/
-- Use as credenciais do superusuário
-- Gerencie usuários e dados
-
-### Logout
-- **URL**: http://127.0.0.1:8000/accounts/logout/
-- Encerra a sessão
-- Redireciona para login
-
----
-
-## 🔧 Comandos Úteis
-
-### Gerenciamento do Servidor
-
-```bash
-# Rodar servidor
-python manage.py runserver
-
-# Rodar em porta diferente
-python manage.py runserver 8080
-
-# Rodar em IP específico
-python manage.py runserver 0.0.0.0:8000
-```
-
-### Banco de Dados
-
-```bash
-# Criar migrações (após alterar models)
-python manage.py makemigrations
-
-# Aplicar migrações
-python manage.py migrate
-
-# Resetar banco de dados (CUIDADO: apaga tudo)
-del db.sqlite3
-python manage.py migrate
-```
-
-### Usuários
-
-```bash
-# Criar superusuário
-python manage.py createsuperuser
-
-# Alterar senha de usuário
-python manage.py changepassword <username>
-```
-
-### Outros
-
-```bash
-# Abrir shell interativo do Django
-python manage.py shell
-
-# Verificar problemas no projeto
-python manage.py check
-
-# Ver todas as URLs disponíveis
-python manage.py show_urls  # (requer django-extensions)
-```
+### Acesse o sistema
+- **URL**: http://127.0.0.1:8000
+- Crie uma conta e faça login!
 
 ---
 
@@ -326,174 +118,285 @@ python manage.py show_urls  # (requer django-extensions)
 | `/accounts/login/` | login | Login | Não |
 | `/accounts/logout/` | logout | Logout | Não |
 | `/accounts/dashboard/` | dashboard | Dashboard | ✅ Sim |
-| `/accounts/profile/` | profile | Perfil | ✅ Sim |
-| `/admin/` | admin | Painel admin | ✅ Sim |
+| `/accounts/profile/` | profile | Visualizar perfil | ✅ Sim |
+| `/accounts/profile/edit/` | edit_profile | Editar perfil | ✅ Sim |
+| `/accounts/password-change/` | password_change | Alterar senha | ✅ Sim |
+| `/accounts/password_reset/` | password_reset | Recuperar senha | Não |
+| `/accounts/reset/<token>/` | password_reset_confirm | Confirmar nova senha | Não |
+| `/admin/` | admin | Painel administrativo | ✅ Sim |
+
+---
+
+## 📧 Configuração de Email
+
+### Desenvolvimento (Console)
+Por padrão, os emails aparecem no terminal:
+```env
+EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
+```
+
+### Produção (Gmail SMTP)
+Configure o arquivo `.env`:
+```env
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=seu_email@gmail.com
+EMAIL_HOST_PASSWORD=sua_senha_de_app
+DEFAULT_FROM_EMAIL=seu_email@gmail.com
+```
+
+### Como gerar Senha de App do Gmail:
+1. Acesse: https://myaccount.google.com/security
+2. Ative "Verificação em duas etapas"
+3. Vá em "Senhas de app"
+4. Gere uma senha para "Email"
+5. Use essa senha no `.env`
+
+📖 **Documentação completa**: Veja `EMAIL_CONFIG.md`
+
+---
+
+## 📅 Diário de Modificações
+
+### Versão 1.0.0 - Sistema Base (Inicial)
+**Data**: Dezembro 2024
+
+**Implementações:**
+- ✅ Sistema de cadastro e login básico
+- ✅ Dashboard protegido
+- ✅ Página de perfil simples
+- ✅ Logout funcional
+- ✅ Templates base com HTML
+
+**Arquivos criados:**
+- `core/settings.py`, `core/urls.py`
+- `accounts/views.py`, `accounts/urls.py`, `accounts/forms.py`
+- `templates/base.html`, `templates/accounts/login.html`, `templates/accounts/register.html`
+
+---
+
+### Versão 1.1.0 - Estética e Design
+**Data**: Dezembro 2024
+
+**Melhorias:**
+- ✅ Interface moderna com paleta roxa (#f4b1fd, #d190ff, #8e26e2)
+- ✅ Botões animados com efeitos hover
+- ✅ Fundo gradiente (azul escuro → roxo)
+- ✅ Cards estilizados com efeito glass
+- ✅ Mensagens de feedback visuais
+- ✅ Ícones e emojis nas páginas
+
+**Arquivos modificados:**
+- `templates/base.html` - Adicionado CSS completo
+- `templates/accounts/*.html` - Estilização de todas as páginas
+
+---
+
+### Versão 1.2.0 - Recuperação de Senha
+**Data**: Dezembro 2024
+
+**Implementações:**
+- ✅ Sistema de recuperação de senha via email
+- ✅ Token seguro com validade de 1 hora
+- ✅ Templates personalizados de email
+- ✅ Link "Esqueceu a senha?" na página de login
+- ✅ Fluxo completo: solicitar → receber email → redefinir
+
+**Arquivos criados:**
+- `templates/accounts/password_reset.html`
+- `templates/accounts/password_reset_done.html`
+- `templates/accounts/password_reset_confirm.html`
+- `templates/accounts/password_reset_complete.html`
+- `templates/registration/password_reset_email.html`
+
+**Arquivos modificados:**
+- `accounts/urls.py` - Adicionadas rotas de recuperação
+- `core/settings.py` - Configurações de email
+- `templates/accounts/login.html` - Link de recuperação
+
+---
+
+### Versão 1.3.0 - Perfil com Avatar
+**Data**: Dezembro 2024
+
+**Implementações:**
+- ✅ Modelo Profile com campo de avatar
+- ✅ Upload de imagens (Pillow)
+- ✅ Edição completa de perfil
+- ✅ Exibição de avatar no perfil
+- ✅ Alteração de senha para usuários logados
+- ✅ Criação automática de perfil ao cadastrar
+
+**Arquivos criados:**
+- `accounts/models.py` - Modelo Profile
+- `accounts/migrations/0001_initial.py` - Migration do Profile
+- `templates/accounts/profile_edit.html`
+- `templates/accounts/password_change.html`
+- `templates/accounts/password_change_done.html`
+- `create_profiles.py` - Script para criar perfis
+
+**Arquivos modificados:**
+- `accounts/forms.py` - Formulários de edição
+- `accounts/views.py` - Views de edição e proteção
+- `accounts/urls.py` - Rotas de edição
+- `core/settings.py` - Configurações de mídia
+- `core/urls.py` - Servir arquivos de mídia
+- `templates/accounts/profile.html` - Exibição de avatar
+- `requirements.txt` - Adicionado Pillow
+
+---
+
+### Versão 1.4.0 - Email Obrigatório e Segurança
+**Data**: Dezembro 2024
+
+**Implementações:**
+- ✅ Campo email obrigatório no cadastro
+- ✅ Variáveis de ambiente com python-dotenv
+- ✅ Arquivo .env para credenciais
+- ✅ Configuração Gmail SMTP funcional
+- ✅ Senha de app do Gmail
+- ✅ Documentação de configuração de email
+
+**Arquivos criados:**
+- `.env` - Variáveis de ambiente (não versionado)
+- `.env.example` - Template de configuração
+- `EMAIL_CONFIG.md` - Documentação de email
+
+**Arquivos modificados:**
+- `accounts/forms.py` - Email obrigatório
+- `templates/accounts/register.html` - Campo de email
+- `core/settings.py` - Carregamento de .env
+- `.gitignore` - Adicionado .env e media/
+- `requirements.txt` - Adicionado python-dotenv
+
+---
+
+### Versão 1.5.0 - Correções e Otimizações
+**Data**: Dezembro 2024
+
+**Correções:**
+- ✅ Bug de navegação corrigido (perfil sem Profile)
+- ✅ URLs de recuperação de senha padronizadas
+- ✅ Proteção automática de criação de perfil
+- ✅ Centralização e proporção de containers
+- ✅ Instalação de python-dotenv no ambiente virtual
+
+**Melhorias:**
+- ✅ Script de teste de email
+- ✅ Validação de configurações
+- ✅ Mensagens de erro mais claras
+- ✅ Documentação atualizada
+
+---
+
+## 📚 Melhorias Sugeridas
+
+### Implementadas ✅
+- [X] Recuperação de senha via email com token
+- [X] Upload de foto de perfil
+- [X] Edição completa de perfil
+- [X] Alteração de senha
+- [X] Email obrigatório no cadastro
+- [X] Segurança com variáveis de ambiente
+- [X] Interface moderna e responsiva
+
+### Próximas Funcionalidades 🚀
+- [ ] Verificação de email (confirmar email após cadastro)
+- [ ] Login social (Google, Facebook, GitHub)
+- [ ] Autenticação de dois fatores (2FA)
+- [ ] Sistema de permissões e grupos
+- [ ] API REST com Django REST Framework
+- [ ] Testes automatizados (pytest)
+- [ ] Paginação de usuários
+- [ ] Histórico de login
+- [ ] Tema claro/escuro
+- [ ] Internacionalização (i18n)
+- [ ] Deploy automatizado
+- [ ] Logs de auditoria
+- [ ] Rate limiting
+- [ ] Captcha no cadastro
 
 ---
 
 ## 🐛 Troubleshooting
 
 ### Erro: "No module named django"
-
-**Problema**: Django não está instalado
-
-**Solução**:
 ```bash
-# Ative o ambiente virtual
 venv\Scripts\activate
-
-# Instale as dependências
 pip install -r requirements.txt
 ```
 
----
-
-### Erro: "No module named 'core.urls'"
-
-**Problema**: Arquivo urls.py não encontrado ou com nome errado
-
-**Solução**:
-- Verifique se existe `core/urls.py` (com "s")
-- Verifique se existe `accounts/urls.py` (com "s")
-
----
-
 ### Erro: "Table doesn't exist"
-
-**Problema**: Banco de dados não foi criado
-
-**Solução**:
 ```bash
 python manage.py migrate
 ```
 
----
-
-### Erro: "Port is already in use"
-
-**Problema**: Porta 8000 já está em uso
-
-**Solução**:
+### Erro: "No Profile for user"
 ```bash
-# Use outra porta
-python manage.py runserver 8080
+python create_profiles.py
 ```
 
----
+### Email não chega
+1. Verifique o arquivo `.env`
+2. Confirme a senha de app do Gmail
+3. Verifique a pasta de SPAM
+4. Veja os logs no terminal
 
-### Erro: "CSRF verification failed"
-
-**Problema**: Token CSRF ausente ou inválido
-
-**Solução**:
-- Verifique se `{% csrf_token %}` está nos formulários
-- Limpe cookies do navegador
-- Use navegação anônima para testar
-
----
-
-### Ambiente virtual não ativa
-
-**Problema**: Erro ao ativar venv
-
-**Solução Windows**:
+### Erro: "Import dotenv could not be resolved"
 ```bash
-# Tente diferentes métodos
-venv\Scripts\activate.bat
-venv\Scripts\Activate.ps1
-
-# Ou use CMD ao invés de PowerShell
-cmd
-venv\Scripts\activate
-```
-
----
-
-### Página não carrega CSS/JS
-
-**Problema**: Arquivos estáticos não configurados
-
-**Solução**:
-```bash
-# Em desenvolvimento, Django serve automaticamente
-# Certifique-se de que DEBUG=True em settings.py
-
-# Para produção, rode:
-python manage.py collectstatic
-```
-
----
-
-## 📝 Configurações Importantes
-
-### settings.py
-
-```python
-# Idioma e Timezone
-LANGUAGE_CODE = 'pt-br'
-TIME_ZONE = 'America/Sao_Paulo'
-
-# Redirecionamentos
-LOGIN_REDIRECT_URL = 'accounts:dashboard'
-LOGOUT_REDIRECT_URL = 'accounts:login'
-LOGIN_URL = 'accounts:login'
-
-# Debug (SEMPRE False em produção)
-DEBUG = True
-
-# Hosts permitidos (configure em produção)
-ALLOWED_HOSTS = []
+pip install python-dotenv
 ```
 
 ---
 
 ## 🔒 Segurança
 
-### Para Produção
+### Desenvolvimento
+- DEBUG = True
+- EMAIL_BACKEND = console
+- SQLite3
 
-1. **Altere SECRET_KEY**:
-```python
-# settings.py
-SECRET_KEY = 'sua-chave-secreta-aleatoria-aqui'
-```
-
-2. **Desative DEBUG**:
-```python
-DEBUG = False
-```
-
-3. **Configure ALLOWED_HOSTS**:
-```python
-ALLOWED_HOSTS = ['seudominio.com', 'www.seudominio.com']
-```
-
-4. **Use HTTPS**:
-```python
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-```
-
-5. **Use banco de dados robusto**:
-- PostgreSQL
-- MySQL
-- MariaDB
+### Produção
+- [ ] DEBUG = False
+- [ ] SECRET_KEY aleatória
+- [ ] ALLOWED_HOSTS configurado
+- [ ] HTTPS/TLS ativado
+- [ ] PostgreSQL/MySQL
+- [ ] EMAIL_BACKEND = SMTP
+- [ ] Variáveis de ambiente no servidor
+- [ ] Backup automático
+- [ ] Monitoramento de logs
 
 ---
 
-## 📚 Próximos Passos
+## 📁 Estrutura do Projeto
 
-### Melhorias Sugeridas
-
-- [X] Adicionar recuperação de senha. obs: Fazer um token que envie email de recuperação de senha
-- [X] Upload de foto de perfil
-- [ ] Verificação de email
-- [ ] Login social (Google, Facebook)
-- [ ] Adicionar CSS/Bootstrap
-- [ ] Criar testes automatizados
-- [ ] Implementar API REST
-- [ ] Adicionar paginação
-- [ ] Sistema de permissões
+```
+Sistema-login/
+├── accounts/              # App de autenticação
+│   ├── migrations/       # Migrações do banco
+│   ├── forms.py          # Formulários
+│   ├── models.py         # Modelo Profile
+│   ├── urls.py           # Rotas
+│   └── views.py          # Lógica
+├── core/                 # Configurações
+│   ├── settings.py       # Settings
+│   └── urls.py           # URLs principais
+├── templates/            # Templates HTML
+│   ├── accounts/         # Templates de autenticação
+│   └── registration/     # Templates de email
+├── media/                # Uploads (avatars)
+├── .env                  # Variáveis de ambiente
+├── .env.example          # Template de .env
+├── .gitignore            # Arquivos ignorados
+├── create_profiles.py    # Script auxiliar
+├── EMAIL_CONFIG.md       # Doc de email
+├── manage.py             # Gerenciador Django
+├── README.md             # Este arquivo
+└── requirements.txt      # Dependências
+```
 
 ---
 
@@ -503,9 +406,13 @@ Este projeto é livre para uso educacional.
 
 ---
 
-## 👨‍💻 Autor
+## 👨💻 Autor
 
-Desenvolvido como projeto de estudo de Django.
+**Kayque Brigadeiro**
+- GitHub: [@Kayquebrigadeiro](https://github.com/Kayquebrigadeiro)
+- Projeto: Sistema de Login Django
+
+Desenvolvido como projeto de estudo de Django e boas práticas de desenvolvimento web.
 
 ---
 
@@ -514,20 +421,39 @@ Desenvolvido como projeto de estudo de Django.
 Se encontrar problemas:
 
 1. Verifique a seção [Troubleshooting](#troubleshooting)
-2. Consulte a [documentação oficial do Django](https://docs.djangoproject.com/)
-3. Verifique se todas as dependências estão instaladas
-4. Certifique-se de que o ambiente virtual está ativo
+2. Consulte o [Diário de Modificações](#diário-de-modificações)
+3. Leia a [documentação oficial do Django](https://docs.djangoproject.com/)
+4. Verifique se todas as dependências estão instaladas
+5. Certifique-se de que o ambiente virtual está ativo
 
 ---
 
-## 🎉 Pronto!
+## 🎉 Pronto para Usar!
 
-Seu sistema de login Django está funcionando! 🚀
+```bash
+# Ative o ambiente virtual
+venv\Scripts\activate
 
-Para começar a usar:
-1. Ative o ambiente virtual: `venv\Scripts\activate`
-2. Rode o servidor: `python manage.py runserver`
-3. Acesse: http://127.0.0.1:8000
-4. Crie uma conta e faça login!
+# Rode o servidor
+python manage.py runserver
 
-**Bom desenvolvimento! 💻**
+# Acesse
+http://127.0.0.1:8000
+```
+
+**Sistema completo e funcional! 🚀**
+
+---
+
+## 📊 Estatísticas do Projeto
+
+- **Linhas de código**: ~2.500+
+- **Commits**: 15+
+- **Funcionalidades**: 12+
+- **Templates**: 10+
+- **Tempo de desenvolvimento**: 1 dia
+- **Versão atual**: 1.5.0
+
+---
+
+**Desenvolvido com ❤️ e Django**
