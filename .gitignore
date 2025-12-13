@@ -9,6 +9,12 @@ __pycache__/
 db.sqlite3
 *.log
 
+# Variáveis de Ambiente
+.env
+
+# Mídia
+media/
+
 # IDE
 .vscode/
 .idea/
